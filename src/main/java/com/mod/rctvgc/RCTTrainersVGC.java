@@ -40,7 +40,7 @@ public class RCTTrainersVGC {
         modEventBus.addListener(this::commonSetup);
 
         // opcional: config pra ligar/desligar VGC
-        // modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {

@@ -1,42 +1,34 @@
 package com.mod.rctvgc;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-// An example config class. This is not required, but it's a good idea to have one to keep your config organized.
-// Demonstrates how to use Neo's config APIs
-public class Config {
-    private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+public final class Config {
+    public static final ModConfigSpec SPEC;
 
-    public static final ModConfigSpec.BooleanValue LOG_DIRT_BLOCK = BUILDER
-            .comment("Whether to log the dirt block on common setup")
-            .define("logDirtBlock", true);
+    public static final ModConfigSpec.BooleanValue ENABLE_DOUBLES;
+    public static final ModConfigSpec.BooleanValue ENABLE_LEVEL_SET;
+    public static final ModConfigSpec.IntValue LEVEL_SET;
 
-    public static final ModConfigSpec.IntValue MAGIC_NUMBER = BUILDER
-            .comment("A magic number")
-            .defineInRange("magicNumber", 42, 0, Integer.MAX_VALUE);
+    static {
+        ModConfigSpec.Builder b = new ModConfigSpec.Builder();
 
-    public static final ModConfigSpec.ConfigValue<String> MAGIC_NUMBER_INTRODUCTION = BUILDER
-            .comment("What you want the introduction message to be for the magic number")
-            .define("magicNumberIntroduction", "The magic number is... ");
+        b.push("vgc");
 
-    // a list of strings that are treated as resource locations for items
-    public static final ModConfigSpec.ConfigValue<List<? extends String>> ITEM_STRINGS = BUILDER
-            .comment("A list of items to log on common setup.")
-            .defineListAllowEmpty("items", List.of("minecraft:iron_ingot"), () -> "", Config::validateItemName);
+        ENABLE_DOUBLES = b
+                .comment("Force RCT trainer battles to be Doubles.")
+                .define("enableDoubles", true);
 
-    static final ModConfigSpec SPEC = BUILDER.build();
+        ENABLE_LEVEL_SET = b
+                .comment("Enable flat level adjustment for RCT trainer battles.")
+                .define("enableLevelSet", true);
 
-    private static boolean validateItemName(final Object obj) {
-        return obj instanceof String itemName && BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(itemName));
+        LEVEL_SET = b
+                .comment("Level to use when enableLevelSet=true. Typical VGC is 50.")
+                .defineInRange("levelSet", 50, 1, 100);
+
+        b.pop();
+        SPEC = b.build();
     }
+
+    private Config() {}
 }

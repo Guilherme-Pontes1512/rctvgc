@@ -1,6 +1,7 @@
 package com.mod.rctvgc.mixins;
 
 import com.gitlab.srcmc.rctapi.api.battle.BattleRules;
+import com.mod.rctvgc.Config;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -17,7 +18,9 @@ public class RctBattleRulesMixin {
             index = 3
     )
     private BattleRules forceAdjustLevels(BattleRules original) {
-        // Preserva o que vier do datapack e só força as flags necessárias pro adjustLevel (do Cobblemon) ser aplicado
+        // Se não quiser level set, não mexe nas rules
+        if (!Config.ENABLE_LEVEL_SET.get()) return original;
+
         return new BattleRules.Builder()
                 .withMaxItemUses(original.getMaxItemUses())
                 .withHealPlayers(original.getHealPlayers())
