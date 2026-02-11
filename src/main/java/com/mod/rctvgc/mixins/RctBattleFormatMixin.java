@@ -1,31 +1,62 @@
 package com.mod.rctvgc.mixins;
 
 import com.cobblemon.mod.common.battles.BattleFormat;
+import com.mod.rctvgc.prefs.BattleContext;
+import com.mod.rctvgc.prefs.VgcPrefs;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.HashSet;
+import java.util.UUID;
+
 @Mixin(value = com.gitlab.srcmc.rctapi.api.battle.BattleFormat.class, remap = false)
 public class RctBattleFormatMixin {
 
     @Inject(method = "getCobblemonBattleFormat", at = @At("RETURN"), cancellable = true)
-    public void forceVgcFormat(CallbackInfoReturnable<BattleFormat> cir) {
-        // Formato que o RCT ia usar originalmente (talvez singles/doubles etc)
+    public void forceFormat(CallbackInfoReturnable<BattleFormat> cir) {
         BattleFormat original = cir.getReturnValue();
 
-        // Base doubles gen 9 do Cobblemon
-        BattleFormat doubles = BattleFormat.Companion.getGEN_9_DOUBLES();
+        UUID playerId = com.mod.rctvgc.prefs.BattleContext.getPlayerId();
+        if (playerId == null) return;
 
-        // Cria um novo BattleFormat (NÃO muta o singleton GEN_9_DOUBLES!)
-        BattleFormat vgc = new BattleFormat(
-                doubles.getMod(),
-                doubles.getBattleType(),
-                original.getRuleSet(),
-                doubles.getGen(),
-                50 // adjustLevel = 50
+        MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
+        if (server == null) return;
+
+        Player player = server.getPlayerList().getPlayer(playerId);
+        if (player == null) return;
+
+        boolean doublesEnabled = VgcPrefs.doublesEnabled(player, true);
+        boolean levelSetEnabled = VgcPrefs.levelSetEnabled(player, true);
+        int level = VgcPrefs.levelSet(player, 50);
+
+        if (BattleContext.forceSingles()) {
+            doublesEnabled = false;
+        }
+
+        if (!doublesEnabled && !levelSetEnabled) return;
+
+        BattleFormat base = doublesEnabled
+                ? BattleFormat.Companion.getGEN_9_DOUBLES()
+                : original;
+
+        var mergedRules = new HashSet<>(base.getRuleSet());
+        mergedRules.addAll(original.getRuleSet());
+
+        int adjustLevel = levelSetEnabled ? level : base.getAdjustLevel();
+
+        BattleFormat out = new BattleFormat(
+                base.getMod(),
+                base.getBattleType(),
+                mergedRules,
+                base.getGen(),
+                adjustLevel
         );
 
-        cir.setReturnValue(vgc);
+        cir.setReturnValue(out);
     }
 }
