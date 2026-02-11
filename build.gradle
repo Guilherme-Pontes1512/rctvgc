@@ -146,6 +146,14 @@ dependencies {
     compileOnly  "curse.maven:kotlin-for-forge-351264:7471280"
     localRuntime "curse.maven:kotlin-for-forge-351264:7471280"
 
+    // Kotlin stdlib (necessário pra compilar código Java que interage com mods Kotlin, ex.: Cobblemon)
+    compileOnly  "org.jetbrains.kotlin:kotlin-stdlib:2.0.0"
+    compileOnly  "org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.0"
+
+    // (opcional, mas ajuda no run dev se algo não puxar transitivo)
+    localRuntime "org.jetbrains.kotlin:kotlin-stdlib:2.0.0"
+    localRuntime "org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.0"
+
     // RCTAPI
     compileOnly   "curse.maven:radical-cobblemon-trainers-api-1152792:7483014"
     localRuntime  "curse.maven:radical-cobblemon-trainers-api-1152792:7483014"
