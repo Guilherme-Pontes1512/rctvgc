@@ -1,0 +1,13 @@
+{
+  "itemGroup.rcttrainersvgc": "Example Mod Tab",
+  "block.rcttrainersvgc.example_block": "Example Block",
+  "item.rcttrainersvgc.example_item": "Example Item",
+
+  "rcttrainersvgc.configuration.title": "RCTTrainers-VGC Configs",
+  "rcttrainersvgc.configuration.section.rcttrainersvgc.common.toml": "RCTTrainers-VGC Configs",
+  "rcttrainersvgc.configuration.section.rcttrainersvgc.common.toml.title": "RCTTrainers-VGC Configs",
+  "rcttrainersvgc.configuration.items": "Item List",
+  "rcttrainersvgc.configuration.logDirtBlock": "Log Dirt Block",
+  "rcttrainersvgc.configuration.magicNumberIntroduction": "Magic Number Text",
+  "rcttrainersvgc.configuration.magicNumber": "Magic Number"
+}

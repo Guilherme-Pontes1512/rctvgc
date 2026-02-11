@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.mod.rctvgc.mixins",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "RctBattleFormatMixin",
+    "RctBattleRulesMixin"
+  ],
+  "client": [],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
