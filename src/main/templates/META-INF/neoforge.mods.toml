@@ -24,7 +24,7 @@ license="MIT"
 modId="rcttrainersvgc" #mandatory
 
 # The version number of the mod
-version="0.0.2" #mandatory
+version="1.0.0" #mandatory
 
 # A display name for the mod
 displayName="RCT Trainers - VGC" #mandatory
@@ -85,7 +85,7 @@ config="rcttrainersvgc.mixins.json"
     modId="minecraft"
     type="required"
     # This version range declares a minimum of the current minecraft version up to but not including the next major version
-    versionRange="${minecraft_version_range}"
+    versionRange="[1.21.1,)"
     ordering="NONE"
     side="BOTH"
 

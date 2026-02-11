@@ -1,5 +1,7 @@
 package com.mod.rctvgc;
 
+import com.mod.rctvgc.commands.RctVgcCommands;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -39,11 +41,17 @@ public class RCTTrainersVGC {
     public RCTTrainersVGC(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
 
-        // opcional: config pra ligar/desligar VGC
-         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+
+        NeoForge.EVENT_BUS.register(this);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
         LOGGER.info("RCTTrainersVGC loaded");
+    }
+
+    @SubscribeEvent
+    public void onRegisterCommands(RegisterCommandsEvent e) {
+        RctVgcCommands.register(e);
     }
 }
