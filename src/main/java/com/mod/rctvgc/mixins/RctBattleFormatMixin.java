@@ -1,6 +1,7 @@
 package com.mod.rctvgc.mixins;
 
 import com.cobblemon.mod.common.battles.BattleFormat;
+import com.mod.rctvgc.prefs.BattleContext;
 import com.mod.rctvgc.prefs.VgcPrefs;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.player.Player;
@@ -20,7 +21,7 @@ public class RctBattleFormatMixin {
     public void forceFormat(CallbackInfoReturnable<BattleFormat> cir) {
         BattleFormat original = cir.getReturnValue();
 
-        UUID playerId = com.mod.rctvgc.prefs.BattleContext.get();
+        UUID playerId = com.mod.rctvgc.prefs.BattleContext.getPlayerId();
         if (playerId == null) return;
 
         MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
@@ -32,6 +33,10 @@ public class RctBattleFormatMixin {
         boolean doublesEnabled = VgcPrefs.doublesEnabled(player, true);
         boolean levelSetEnabled = VgcPrefs.levelSetEnabled(player, true);
         int level = VgcPrefs.levelSet(player, 50);
+
+        if (BattleContext.forceSingles()) {
+            doublesEnabled = false;
+        }
 
         if (!doublesEnabled && !levelSetEnabled) return;
 
