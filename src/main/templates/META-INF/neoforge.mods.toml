@@ -29,6 +29,10 @@ version="1.0.0" #mandatory
 # A display name for the mod
 displayName="RCT Trainers - VGC" #mandatory
 
+# This mod changes server-side RCT battle rules and registers server commands.
+# Clients do not need it installed to connect.
+displayTest="IGNORE_ALL_VERSION"
+
 # A URL to query for updates for this mod. See the JSON update specification https://docs.neoforged.net/docs/misc/updatechecker/
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 
