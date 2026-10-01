@@ -92,7 +92,7 @@ config="rcttrainersvgc.mixins.json"
 [[dependencies.rcttrainersvgc]]
 modId="cobblemon"
 type="required"
-versionRange="[1.7,1.8)"
+versionRange="[1.8,1.9)"
 ordering="AFTER"
 side="BOTH"
 
@@ -106,7 +106,7 @@ side="BOTH"
 [[dependencies.rcttrainersvgc]]
 modId="rctapi"
 type="required"
-versionRange="[0.14,)"
+versionRange="[0.16,)"
 ordering="AFTER"
 side="BOTH"
 
@@ -120,7 +120,7 @@ side="BOTH"
 [[dependencies.rcttrainersvgc]]
 modId="rctmod"
 type="required"
-versionRange="[0.17,)"
+versionRange="[0.19,)"
 ordering="AFTER"
 side="BOTH"
 

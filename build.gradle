@@ -139,8 +139,8 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
     // Cobblemon
-    compileOnly   "curse.maven:cobblemon-687131:7273151"
-    localRuntime  "curse.maven:cobblemon-687131:7273151"
+    compileOnly   "curse.maven:cobblemon-687131:8868914"
+    localRuntime  "curse.maven:cobblemon-687131:8868914"
 
     // Kotlin for Forge (necessário pro Cobblemon carregar)
     compileOnly  "curse.maven:kotlin-for-forge-351264:7471280"
@@ -155,16 +155,16 @@ dependencies {
     localRuntime "org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.0"
 
     // RCTAPI
-    compileOnly   "curse.maven:radical-cobblemon-trainers-api-1152792:7483014"
-    localRuntime  "curse.maven:radical-cobblemon-trainers-api-1152792:7483014"
+    compileOnly   "curse.maven:radical-cobblemon-trainers-api-1152792:8876921"
+    localRuntime  "curse.maven:radical-cobblemon-trainers-api-1152792:8876921"
 
     //ArchitecturyApi (necessário pro RCTAPI carregar)
     compileOnly   "curse.maven:architectury-api-419699:5786327"
     localRuntime  "curse.maven:architectury-api-419699:5786327"
 
     // RCTMod
-    compileOnly   "curse.maven:rctmod-1009534:7279672"
-    localRuntime  "curse.maven:rctmod-1009534:7279672"
+    compileOnly   "curse.maven:rctmod-1009534:8951132"
+    localRuntime  "curse.maven:rctmod-1009534:8951132"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
