@@ -53,7 +53,7 @@ public class RctBattleRulesMixin {
             method = "makeBattle",
             at = @At(
                     value = "INVOKE",
-                    target = "Lcom/gitlab/srcmc/rctapi/api/battle/BattleManager;startBattle(Ljava/util/List;Ljava/util/List;Lcom/gitlab/srcmc/rctapi/api/battle/BattleFormat;Lcom/gitlab/srcmc/rctapi/api/battle/BattleRules;)Ljava/util/UUID;"
+                    target = "Lcom/gitlab/srcmc/rctapi/api/battle/BattleManager;startBattle(Ljava/util/List;Ljava/util/List;Lcom/gitlab/srcmc/rctapi/api/battle/BattleFormatProvider;Lcom/gitlab/srcmc/rctapi/api/battle/BattleRules;)Ljava/util/UUID;"
             ),
             index = 3
     )
